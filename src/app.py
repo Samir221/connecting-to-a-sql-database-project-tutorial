@@ -58,8 +58,10 @@ except Exception as e:
 
 # 4) Use pandas to print one of the tables as dataframes using read_sql function
 try:
-    # Pass the engine directly to pandas.read_sql
-    df = pd.read_sql("SELECT * FROM books", engine)
+    # Establish a connection from the engine
+    with engine.connect() as connection:
+        # Use this connection with pandas
+        df = pd.read_sql("SELECT * FROM books", connection)
 
     # Print the DataFrame
     print(df)
